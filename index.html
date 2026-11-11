@@ -76,7 +76,7 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
 :root{
   --bg:#ffffff;
@@ -94,9 +94,11 @@
   --shadow:0 10px 30px -12px rgba(15,31,92,.18);
   --shadow-lg:0 30px 60px -20px rgba(15,31,92,.28);
   --radius:20px;
-  --font:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --serif:"Instrument Serif",Georgia,serif;
-  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  --font:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --display:"Manrope","Inter",system-ui,sans-serif;
+  --code:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  --serif:var(--display);
+  --mono:var(--font); /* small labels now use the clean body font */
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -105,7 +107,7 @@ a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
 .container{width:min(1200px,100% - 32px);margin-inline:auto}
 .grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-.serif{font-family:var(--serif);font-style:italic;font-weight:400}
+.serif{font-family:inherit;font-style:normal;font-weight:inherit}
 
 /* progress + cursor glow */
 #progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--grad);z-index:1000}
@@ -972,6 +974,27 @@ header .nav{-webkit-backdrop-filter:blur(16px) saturate(170%);backdrop-filter:bl
 .lite .hero-blob{filter:blur(40px)}
 
 @media (max-width:600px){.qc{right:16px;bottom:80px}.brand{min-width:0;flex:1 1 40%;padding:12px 14px}}
+
+/* ================= TYPOGRAPHY =================
+   Manrope for headings and big numbers, Inter for everything else,
+   JetBrains Mono only where real code is shown. */
+body{font-family:var(--font);font-feature-settings:"cv11","ss01";letter-spacing:-.006em}
+h1,h2,h3,h4,h5,.logo,.btn,
+.price b,.stat b,.est,.g-val b,.ck-big b,.range-val,.pt-price,.big,.about-visual .t1 .big,
+.orbit-core b,.qc-head b,.brand b,.panel-head h3,.flow-info h4,.ftitle{font-family:var(--display)}
+.hero h1{letter-spacing:-.035em;font-weight:800}
+.hero h1 .line2{font-weight:800}
+.sec-head h2{letter-spacing:-.03em;font-weight:800;line-height:1.08}
+.about-copy h2{font-weight:800}
+h3{letter-spacing:-.015em}
+/* small uppercase labels: clean, slightly tighter tracking than the old code font */
+.eyebrow,.brands-label,.live-tag,.w-cat,.job-head .date,.est-label,.pt-head,.theme-menu-label,
+.fi-doc,.price-meta,.ck .field label small,.ba-tag,.ck-sig .row span:last-child,.cl-stats span{font-family:var(--font);letter-spacing:.08em;font-weight:600}
+.price-meta{letter-spacing:0;font-weight:500}
+.job-head .date,.ck-sig .row span:last-child{letter-spacing:0}
+/* real code keeps the monospace font */
+.code,.resp,.api-ep,.params code,.tab,.copy,.ba-before,.fsys,.fback-label,.method{font-family:var(--code)}
+.lead,.sec-head p,.about-copy p{line-height:1.7}
 </style>
 </head>
 <body>
