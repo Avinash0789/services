@@ -799,6 +799,7 @@ header.scrolled .nav{--glass:var(--glass-hi)}
 @media (max-width:600px){.live-strip{border-radius:20px;font-size:.82rem}.live-strip .sep{display:none}}
 .hp{position:absolute!important;left:-10000px;width:1px;height:1px;overflow:hidden}
 .form-note.ok{color:#16b364;font-weight:700}
+.opt-tag{font-weight:500;font-size:.72rem;color:var(--muted);margin-left:4px}
 
 /* theme menu */
 .theme-wrap{position:relative}
@@ -1643,7 +1644,10 @@ header .nav{-webkit-backdrop-filter:blur(16px) saturate(170%);backdrop-filter:bl
           <div class="field"><label for="name">Your name</label><input id="name" required maxlength="100" autocomplete="name" placeholder="Jane Doe" /></div>
           <div class="field"><label for="email">Your email</label><input id="email" type="email" required maxlength="200" autocomplete="email" placeholder="jane@company.com" /></div>
         </div>
-        <div class="field"><label for="company">Company</label><input id="company" maxlength="120" autocomplete="organization" placeholder="Acme Inc." /></div>
+        <div class="row2">
+          <div class="field"><label for="phone">Phone / WhatsApp <span class="opt-tag">optional</span></label><input id="phone" type="tel" inputmode="tel" maxlength="25" autocomplete="tel" placeholder="+91 98765 43210" pattern="[+]?[0-9 ()\-]{7,25}" title="Digits, spaces, + ( ) and - only" /></div>
+          <div class="field"><label for="company">Company</label><input id="company" maxlength="120" autocomplete="organization" placeholder="Acme Inc." /></div>
+        </div>
         <div class="field hp" aria-hidden="true"><label for="website">Website</label><input id="website" tabindex="-1" autocomplete="off" /></div>
         <div class="field"><label for="service">Service needed</label>
           <select id="service">
@@ -1941,13 +1945,13 @@ header .nav{-webkit-backdrop-filter:blur(16px) saturate(170%);backdrop-filter:bl
   const defaultNote = formNote.textContent;
   function mailtoFallback(p) {
     const subject = `Documentation enquiry: ${p.service}${p.company ? ' — ' + p.company : ''}`;
-    const body = `Hi Avinash,\n\n${p.message}\n\nService: ${p.service}\nName: ${p.name}\nEmail: ${p.email}${p.company ? '\nCompany: ' + p.company : ''}`;
+    const body = `Hi Avinash,\n\n${p.message}\n\nService: ${p.service}\nName: ${p.name}\nEmail: ${p.email}${p.phone ? '\nPhone: ' + p.phone : ''}${p.company ? '\nCompany: ' + p.company : ''}`;
     location.href = `mailto:avinashbarik619@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   }
   form.addEventListener('submit', async e => {
     e.preventDefault();
     const payload = {
-      name: $('#name').value.trim(), email: $('#email').value.trim(), company: $('#company').value.trim(),
+      name: $('#name').value.trim(), email: $('#email').value.trim(), phone: $('#phone').value.trim(), company: $('#company').value.trim(),
       service: $('#service').value, message: $('#msg').value.trim(), website: $('#website').value,
       source: lastBrief ? 'planner' : 'form', planner: lastBrief
     };
